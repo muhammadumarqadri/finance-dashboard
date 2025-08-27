@@ -1,0 +1,143 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Advanced Personal Finance Dashboard</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body class="light-mode">
+  <div class="dashboard-container">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <h2>Finance Dashboard</h2>
+      <nav>
+        <ul>
+          <li><a href="#dashboard-section">Dashboard</a></li>
+          <li><a href="#transactions-section">Transactions</a></li>
+          <li><a href="#budgets-section">Budgets</a></li>
+          <li><a href="#goals-section">Goals</a></li>
+          <li><a href="#reports-section">Reports</a></li>
+        </ul>
+      </nav>
+      <button id="theme-toggle">Toggle Dark Mode</button>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <header id="dashboard-section">
+        <h1>Personal Finance Dashboard</h1>
+        <div class="currency-selector">
+          <label for="currency">Currency:</label>
+          <select id="currency">
+            <option value="₹">INR (₹)</option>
+            <option value="$">USD ($)</option>
+            <option value="€">EUR (€)</option>
+            <option value="£">GBP (£)</option>
+          </select>
+        </div>
+      </header>
+
+      <!-- Summary Cards -->
+      <section class="summary-cards">
+        <div class="card income-card">
+          <h3>Total Income</h3>
+          <p id="total-income">₹0.00</p>
+        </div>
+        <div class="card expense-card">
+          <h3>Total Expenses</h3>
+          <p id="total-expenses">₹0.00</p>
+        </div>
+        <div class="card balance-card">
+          <h3>Balance</h3>
+          <p id="balance">₹0.00</p>
+        </div>
+      </section>
+
+      <!-- Add Transaction Form -->
+      <section class="transaction-form">
+        <h2>Add Transaction</h2>
+        <form id="transaction-form">
+          <input type="text" id="description" placeholder="Description" required/>
+          <input type="number" id="amount" placeholder="Amount" step="0.01" required/>
+          <select id="type">
+            <option value="income">Income</option>
+            <option value="expense">Expense</option>
+          </select>
+          <select id="category">
+            <option value="Salary">Salary</option>
+            <option value="Food">Food</option>
+            <option value="Rent">Rent</option>
+            <option value="Transport">Transport</option>
+            <option value="Entertainment">Entertainment</option>
+            <option value="Other">Other</option>
+          </select>
+          <input type="date" id="date" required/>
+          <select id="payment-method">
+            <option value="Cash">Cash</option>
+            <option value="Card">Card</option>
+            <option value="UPI">UPI</option>
+            <option value="Wallet">Wallet</option>
+          </select>
+          <button type="submit">Add Transaction</button>
+        </form>
+      </section>
+
+      <!-- Transaction List -->
+      <section class="transaction-list" id="transactions-section">
+        <h2>Recent Transactions</h2>
+        <table id="transactions-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Description</th>
+              <th>Category</th>
+              <th>Amount</th>
+              <th>Type</th>
+              <th>Payment Method</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <!-- Budget Section -->
+      <section class="budget-section" id="budgets-section">
+        <h2>Budgets</h2>
+        <div id="budgets-container"></div>
+        <button id="add-budget-btn">Add Budget</button>
+      </section>
+
+      <!-- Goals Section -->
+      <section class="goals-section" id="goals-section">
+        <h2>Goals</h2>
+        <div id="goals-container"></div>
+        <button id="add-goal-btn">Add Goal</button>
+      </section>
+
+      <!-- Reports Section -->
+      <section class="reports-section" id="reports-section">
+        <h2>Financial Reports</h2>
+        <canvas id="expense-pie-chart"></canvas>
+        <canvas id="income-expense-bar-chart"></canvas>
+        <canvas id="spending-trend-line-chart"></canvas>
+      </section>
+
+      <!-- Export Section -->
+      <section class="export-section">
+        <h2>Export Data</h2>
+        <button id="export-json">Export as JSON</button>
+        <button id="export-csv">Export as CSV</button>
+        <button id="export-pdf">Download PDF Report</button>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
